@@ -1,2 +1,2 @@
 # volt-compiler
-A compiler that translates easy to read .volt syntax into .rules (Firebase Security Rules) syntax
+A compiler that translates easy to read Volt (.vlt) syntax into Firebase Security Rules (.rules) syntax. These rules are used to secure and validate data in Firebase's [Cloud Firestore](https://firebase.google.com/docs/firestore/) and [Cloud Storage](https://firebase.google.com/docs/storage/). The idea for this project was inspired by the [Firebase Bolt Compiler](https://github.com/firebase/bolt) with logic and algorithmic structure inspired by [The Super Tiny Compiler](https://github.com/thejameskyle/the-super-tiny-compiler).
