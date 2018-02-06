@@ -1,0 +1,20 @@
+use testDB in firestore;
+
+collection users {
+    read: public;
+    write: private;
+    create: restricted();
+    update: private;
+    delete: private to author;
+
+    required static string author = '';
+
+    document nieky {
+        ...
+    }
+
+    collection messages {
+        ...
+    }
+
+}
