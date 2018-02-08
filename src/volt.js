@@ -1,14 +1,22 @@
 const { read, write } = require('./io');
+const {
+    tokenizer,
+    parser,
+    transformer,
+    codeGenerator
+} = require('./parts');
 
 'use strict';
 
 function voltToRules(inputFileName = 'test.vlt', outputFileName = 'test.rules') {
 
     return read(inputFileName)
-        // .then(voltInput => {
-            // let rules = compiler(voltInput);
-        .then(rules => {
+        .then(voltInput => {
+            return compiler(voltInput);
+        }).then(rules => {
             return write(outputFileName, rules);
+        }).then(outputFile => {
+            console.log(inputFileName, 'has been successfully compiled to', outputFileName, 'successfully...');
         }).catch(error => {
             console.log(error);
         });
@@ -28,10 +36,10 @@ function voltToRules(inputFileName = 'test.vlt', outputFileName = 'test.rules') 
  */
 function compiler(voltInput) {
 
-    let tokens = tokenizer(voltInput);
-    let ast = parser(tokens);
-    let newAst = transformer(ast);
-    let rules = codeGenerator(newAst);
+    let tokens = tokenizer();
+    let ast = parser();
+    let newAst = transformer();
+    let rules = codeGenerator();
 
     return rules;
 
