@@ -1,20 +1,37 @@
+// declare database/bucket from firestore/storage
 use testDB in firestore;
 
-collection users {
-    read: public;
-    write: private;
-    create: restricted();
-    update: private;
+// define rules for certain collection
+collection chatRooms {
+
+    read: restricted(members);
+    // write: private;
+    create: protected;
+    update: private to author;
     delete: private to author;
 
-    required static string author = '';
+    required static string creator;
+    required list members;
 
-    document nieky {
+    // define rules for specific user document
+    document jfdksa4h320n0 {
         ...
     }
 
+    // define rules for subcollection within user documents
     collection messages {
-        ...
+
+        read: restricted(members in chatRoom);
+        create: restricted(members in chatRoom);
+        update: private to author;
+        delete: private to author;
+        
+        required static timestamp dateCreated;
+        required timestamp lastUpdated;
+        required static string author;
+        required string message;
+        list mentions;
+        
     }
 
 }
