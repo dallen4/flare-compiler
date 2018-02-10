@@ -11,12 +11,16 @@ module.exports = function tokenizer(input = '') {
     // init empty tokens array
     let tokens = [];
 
-    // TODO init regexes
-    let WHITESPACE = /\s/;
-    let LETTERS = /W/;
+    // init regexes
+    let WHITESPACE = /\s|\t|\n/;
+    let LETTERS = /[a-z]/i;
     let NUMBERS = /[0-9]/;
 
-    while (current < input.length);
+    // init var with string length
+    // -- property lookup is resource/time intensive task and will save time
+    let inputLength = input.length;
+
+    while (current < inputLength);
 
     return tokens;
 
