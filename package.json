@@ -17,6 +17,10 @@
   ],
   "author": "dallen4",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.0"
   }
 }
