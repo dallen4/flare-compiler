@@ -1,9 +1,12 @@
 const fs = require('fs');
+const path = require('path');
 
 function read(fileName) {
 
+    let filePath = path.join(__dirname, '..', fileName);
+
     return new Promise((resolve, reject) => {
-        fs.readFile(fileName, 'utf8', (error, data) => {
+        fs.readFile(filePath, 'utf8', (error, data) => {
             error ? reject(error) : resolve(data);
         });
     });
