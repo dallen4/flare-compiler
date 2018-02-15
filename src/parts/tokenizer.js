@@ -24,44 +24,69 @@ module.exports = function tokenizer(input = '') {
 
         let char = input[current];
 
-        // skip all whitespace
-        if (WHITESPACE.test(char)) {
-            current++;
-            continue;
+        // init string to store words or digit sequence
+        let value = '';
+
+        // cases ordered by estimated frequency
+        switch (char) {
+
+            // skip all whitespace
+            case WHITESPACE.test(char):
+                current++;
+                continue;
+            
+            // 'word' token
+            case LETTERS.test(char):
+
+                // while char is letter, add to value
+                // increment after adding using ++current
+                while (LETTERS.test(char)) {
+                    value += char;
+                    char = input[++current];
+                }
+
+                // push token with word value to tokens
+                tokens.push({ type: 'word', value });
+
+                continue;
+
+            // 'number' token
+            // -- grab entire number
+            case NUMBERS.test(char):
+
+                // while char is num, add to value
+                // increment after adding using ++current
+                while (NUMBERS.test(char)) {
+                    value += char;
+                    char = input[++current];
+                }
+
+                // push token with num value to tokens
+                tokens.push({ type: 'number', value });
+
+                continue;
+            
+            // unknown token type
+            // -- throw TypeError
+            default:
+                throw new TypeError('Unexpected token: ' + char);
+
+            // TODO 'string' token
+            case char === '\'' || char === '"':
+
+            // TODO 'brace' token
+            case char === '{' || char === '}':
+
+            // TODO 'paren' token
+            case char === '(' || char === ')':
+
+            // TODO 'colon' token
+            case char === ':':
+
+            // TODO 'semi' token
+            case char === ';':
+            
         }
-
-        // 'number' token
-        // grab entire number sequence
-        if (NUMBERS.test(char)) {
-
-            // init string to store num terms
-            let value = '';
-
-            // while char is num, add to value
-            // increment after adding using ++current
-            while (NUMBERS.test(char)) {
-                value += char;
-                char = input[++current];
-            }
-
-            // push token with whole num value to tokens
-            tokens.push({ type: 'number', value });
-
-            continue;
-
-        }
-
-        // TODO 'word' token
-
-        // TODO 'string' token
-
-        // TODO 'brace' token
-
-        // TODO 'paren' token
-
-        // TODO 'colon' token
-
-        // TODO 'semi' token
 
     }
 
