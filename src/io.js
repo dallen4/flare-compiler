@@ -15,8 +15,10 @@ function read(fileName) {
 
 function write(fileName, data) {
 
+    let filePath = path.join(__dirname, '..', fileName);
+
     return new Promise((resolve, reject) => {
-        fs.writeFile(fileName, data, error => {
+        fs.writeFile(filePath, data, error => {
             error ? reject(error) : resolve(fileName + ' has been generated...');
         });
     });
