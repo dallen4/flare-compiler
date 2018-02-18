@@ -27,45 +27,44 @@ module.exports = function tokenizer(input = '') {
         // init string to store words or digit sequence
         let value = '';
 
+        // skip all whitespace
+        if (WHITESPACE.test(char)) {
+            current++;
+            continue;
+        
+        // 'word' token
+        } else if (LETTERS.test(char)) {
+
+            // while char is letter, add to value
+            // increment after adding using ++current
+            while (LETTERS.test(char)) {
+                value += char;
+                char = input[++current];
+            }
+
+            // push token with word value to tokens
+            tokens.push({ type: 'word', value });
+            continue;
+
+        // 'number' token
+        } else if (NUMBERS.test(char)) {
+            // while char is num, add to value
+            // increment after adding using ++current
+            while (NUMBERS.test(char)) {
+                value += char;
+                char = input[++current];
+            }
+
+            // push token with num value to tokens
+            tokens.push({ type: 'number', value });
+            continue;
+        }
+
         // cases ordered by estimated frequency
         switch (char) {
-
-            // skip all whitespace
-            case WHITESPACE.test(char):
-                current++;
-                continue;
-            
-            // 'word' token
-            case LETTERS.test(char):
-
-                // while char is letter, add to value
-                // increment after adding using ++current
-                while (LETTERS.test(char)) {
-                    value += char;
-                    char = input[++current];
-                }
-
-                // push token with word value to tokens
-                tokens.push({ type: 'word', value });
-                continue;
-
-            // 'number' token
-            // -- grab entire number
-            case NUMBERS.test(char):
-
-                // while char is num, add to value
-                // increment after adding using ++current
-                while (NUMBERS.test(char)) {
-                    value += char;
-                    char = input[++current];
-                }
-
-                // push token with num value to tokens
-                tokens.push({ type: 'number', value });
-                continue;
             
             // 'string' token
-            case char === '\'':
+            case '\'':
                 
                 // skip quote
                 char = input[++current];
@@ -82,10 +81,10 @@ module.exports = function tokenizer(input = '') {
 
                 // push token with string value to tokens
                 tokens.push({ type: 'string', value });
-                continue;
+                break;
             
             // "string" token
-            case char === '"':
+            case '"':
                 
                 // skip quote
                 char = input[++current];
@@ -102,61 +101,73 @@ module.exports = function tokenizer(input = '') {
 
                 // push token with string value to tokens
                 tokens.push({ type: 'string', value });
-                continue;
+                break;
 
             // open 'paren' token
-            case char === '(':
+            case '(':
                 tokens.push({
                     type: 'paren',
                     value: char
                 });
                 current++;
-                continue;
+                break;
             
             // close 'paren' token
-            case char === ')':
+            case ')':
                 tokens.push({
                     type: 'paren',
                     value: char
                 });
                 current++;
-                continue;
+                break;
 
             // 'semi' token
-            case char === ';':
+            case ';':
                 tokens.push({
                     type: 'semi',
                     value: char
                 });
                 current++;
-                continue;
+                break;
             
             // 'colon' token
-            case char === ':':
+            case ':':
                 tokens.push({
                     type: 'colon',
                     value: char
                 });
                 current++;
-                continue;
+                break;
 
             // open 'brace' token
-            case char === '{':
+            case '{':
                 tokens.push({
                     type: 'brace',
                     value: char
                 });
                 current++;
-                continue;
+                break;
             
             // close 'brace' token
-            case char === '}':
+            case '}':
                 tokens.push({
                     type: 'brace',
                     value: char
                 });
                 current++;
-                continue;
+                break;
+            
+            // disregard comments
+            case '/':
+
+                // skip commented chars until end of line
+                while (char !== '\n') {
+                    char = input[++current];
+                }
+                
+                // skip new line char
+                char = input[++current];
+                break;
             
             // unknown token type
             // -- throw TypeError
@@ -165,7 +176,7 @@ module.exports = function tokenizer(input = '') {
                     + '\nPlease see documentation for syntax guidelines.');
             
         }
-
+    
     }
 
     return tokens;
