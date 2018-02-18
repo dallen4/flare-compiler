@@ -15,7 +15,6 @@ collection chatRooms {
 
     // define rules for specific user document
     document jfdksa4h320n0 {
-        ...
     }
 
     // define rules for subcollection within user documents
