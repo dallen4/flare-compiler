@@ -5,10 +5,10 @@ use testDB in firestore;
 collection chatRooms {
 
     read: restricted(members);
-    // write: private;
-    create: protected;
-    update: private to author;
-    delete: private to author;
+    write: private();
+    create: protected();
+    update: private(author);
+    delete: private(author);
 
     required static string creator;
     required list members;
@@ -22,8 +22,8 @@ collection chatRooms {
 
         read: restricted(members in chatRoom);
         create: restricted(members in chatRoom);
-        update: private to author;
-        delete: private to author;
+        update: private(author);
+        delete: private(author);
         
         required static timestamp dateCreated;
         required timestamp lastUpdated;
