@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": false,
   "dependencies": {
-    "commander": "^2.13.0"
+    "commander": "^2.13.0",
+    "pluralize": "^7.0.0"
   },
   "repository": "https://github.com/dallen4/volt-compiler.git",
   "homepage": "https://dallen4.github.io/volt-compiler",
