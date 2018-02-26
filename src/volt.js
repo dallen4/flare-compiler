@@ -1,4 +1,4 @@
-const { read, write } = require('./io');
+const { read, write } = require('./util/io');
 const {
     tokenizer,
     parser,
