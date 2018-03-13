@@ -1,5 +1,5 @@
 // declare database/bucket from firestore/storage
-use testDB in firestore;
+use default in firestore;
 
 // define rules for certain collection
 collection chatRooms {
