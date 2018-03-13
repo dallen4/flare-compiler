@@ -15,6 +15,8 @@ module.exports = function tokenizer(input = '') {
     let WHITESPACE = /\s|\t|\n/;
     let LETTERS = /[a-z]/i;
     let NUMBERS = /[0-9]/;
+    // TODO else-if case for conditionals
+    let CONDITIONALS = /[=|>|<|!]/;
 
     // init var with string length
     // -- property lookup is resource/time intensive task and will save time
