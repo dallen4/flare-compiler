@@ -98,6 +98,11 @@ function addType(variableName, variableType) {
 
 }
 
+function addValueCondition(variableName, variableValue, condition = '==') {
+
+    return `${requestDataPrefix}.${variableName} ${condition} ${variableValue}`;
+}
+
 module.exports = {
     designateService,
     designateDatabase,
@@ -105,5 +110,6 @@ module.exports = {
     generateDocumentMatch,
     generateAccessState,
     makeStatic,
-    addType
+    addType,
+    addValueCondition
 };
