@@ -1,4 +1,4 @@
-// TODO Tokenizer function file
+// Tokenizer function
 'use strict';
 
 module.exports = function tokenizer(input = '') {
@@ -15,7 +15,6 @@ module.exports = function tokenizer(input = '') {
     let WHITESPACE = /\s|\t|\n/;
     let LETTERS = /[a-z]/i;
     let NUMBERS = /[0-9]/;
-    // TODO else-if case for conditionals
     let CONDITIONALS = /[=|>|<|!]/;
 
     // init var with string length
@@ -49,7 +48,26 @@ module.exports = function tokenizer(input = '') {
             continue;
 
         // 'number' token
+        } else if (CONDITIONALS.test(char)) {
+
+            // grabs next char in input string
+            let next = input[++current];
+
+            // tests if next char is '='
+            // -- all conditionals are two chars and end with '='
+            if (next === '=') {
+
+                char += next;
+                tokens.push({ type: 'cond', value: char });
+
+                continue;
+                
+            } else {
+                throw new TypeError('Conditionals require two characters.');
+            }
+
         } else if (NUMBERS.test(char)) {
+
             // while char is num, add to value
             // increment after adding using ++current
             while (NUMBERS.test(char)) {
@@ -60,6 +78,7 @@ module.exports = function tokenizer(input = '') {
             // push token with num value to tokens
             tokens.push({ type: 'number', value });
             continue;
+
         }
 
         // cases ordered by estimated frequency
