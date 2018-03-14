@@ -32,17 +32,20 @@ function lineToNode(line = []) {
         node.type = 'variable';
         
         while (line.length) {
-            if (line[0] === 'required') {
+
+            let item = line.shift();
+
+            if (item === 'required') {
                 node.required = true;
-            } else if(line[0] === 'static') {
+            } else if(item === 'static') {
                 node.static = true;
-            } else if (isDataType(line[0])) {
+            } else if (isDataType(item)) {
                 // TODO support 
             } else if (line.length > 1) {
-                node.name = line[0];
+                node.name = item;
                 // TODO support conditional
             }
-            line.splice(0, 1);
+            
         }
 
         return;
