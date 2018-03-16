@@ -54,14 +54,21 @@ module.exports = function tokenizer(input = '') {
             let next = input[++current];
 
             // tests if next char is '='
-            // -- all conditionals are two chars and end with '='
+            // -- most conditionals are two chars and end with '='
+            // -- exceptions include: '<', '>'
             if (next === '=') {
 
-                char += next;
-                tokens.push({ type: 'cond', value: char });
+                let value = char + next;
+                tokens.push({ type: 'cond', value });
 
                 continue;
-                
+            
+            // support for '<' and '>'
+            } else if (char === '<' || char === '>') {
+
+                tokens.push({ type: 'cond', value: char });
+                continue;
+
             } else {
                 throw new TypeError('Conditionals require two characters.');
             }
