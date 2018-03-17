@@ -2,9 +2,7 @@
 'use strict';
 
 module.exports = function tokenizer(input = '') {
-
-    console.log('tokenizing...');
-
+    
     // init cursor variable
     let current = 0;
 
@@ -60,6 +58,7 @@ module.exports = function tokenizer(input = '') {
 
                 let value = char + next;
                 tokens.push({ type: 'cond', value });
+                current++;
 
                 continue;
             
