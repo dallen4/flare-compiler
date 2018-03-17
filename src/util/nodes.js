@@ -1,24 +1,30 @@
-import { throws } from "assert";
-
 // nodes util functions
+// TODO COMMENT CODE
+var { isAccessState, isDataType } = require('./helpers');
 
-// TODO parse line into node
+// parse line into node
 // -- compensate for line type (access vs. variable)
 function lineToNode(line = []) {
 
     let node = {};
 
-    if (isAccessState(line[0])) {
+    if (isAccessState(line[0].value)) {
 
+        node = {
+            type: 'access',
+            name: line[0].value,
+            condition: line[2].value,
+            param: ''
+        };
         node.type = 'access';
-        node.name = line[0];
-        node.condition = line[2];
+        node.name = line[0].value;
+        node.condition = line[2].value;
 
-        if (line[2] === 'restricted' && line[3] === '(' && line[5] === ')')
-            node.param = line[4];
-        else if (line[2] === 'private' && line[4] !== ')')
-            node.param = line[4];
-        else if (line[2] === 'private')
+        if (line[2].value === 'restricted' && line[3].value === '(' && line[5].value === ')')
+            node.param = line[4].value;
+        else if (line[2].value === 'private' && line[4].value !== ')')
+            node.param = line[4].value;
+        else if (line[2].value === 'private')
             node.param = 'uid';
         else
             throw new TypeError('Error in access state declaration!'
@@ -29,62 +35,46 @@ function lineToNode(line = []) {
     
     } else {
 
-        node.type = 'variable';
+        node = {
+            type: 'variable',
+            name: '',
+            dataType: '',
+            required: false,
+            static: false,
+            conditional: null
+        };
         
         while (line.length) {
 
             let item = line.shift();
 
-            if (item === 'required') {
+            let { type, value } = item;
+
+            if (value === 'require') {
                 node.required = true;
-            } else if(item === 'static') {
+            } else if(value === 'static') {
                 node.static = true;
-            } else if (isDataType(item)) {
-                // TODO support 
-            } else if (line.length > 1) {
-                node.name = item;
-                // TODO support conditional
+            } else if (isDataType(value)) {
+                node.dataType = value;
+            } else if (type === 'word') {
+                node.name = value;
+            } else if (type === 'cond') {
+                node.conditional = {
+                    value: line[0].value,
+                    relation: value
+                };
+                return node;
+            } else {
+                throw new TypeError(`Error converting tokens to variable node
+                failed on token: ${item}`)
             }
             
         }
 
-        return;
+        return node;
+
     }
 
-}
-
-function isAccessState(term) {
-    switch (term) {
-        case 'read':
-        case 'get':
-        case 'list':
-        case 'write':
-        case 'create':
-        case 'update':
-        case 'delete':
-            return true;
-        default:
-            return false;
-    }
-}
-
-// test all data types supported by Firebase Security Rules
-// data types from: https://firebase.google.com/docs/firestore/reference/security/
-function isDataType(term) {
-    switch(term) {
-        case 'null':
-        case 'bool':
-        case 'int':
-        case 'float':
-        case 'string':
-        case 'timestamp':
-        case 'duration':
-        case 'list':
-        case 'map':
-            return true;
-        default:
-            return false;
-    }
 }
 
 module.exports = {

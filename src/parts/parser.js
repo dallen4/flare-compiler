@@ -3,9 +3,7 @@
 
 var { lineToNode } = require('../util/nodes');
 
-module.exports = function parser(tokens = []) {
-
-    console.log('parsing...');
+module.exports = function parser(tokens) {
 
     let current = 0;
 
@@ -13,70 +11,51 @@ module.exports = function parser(tokens = []) {
 
         let token = tokens[current];
 
-        switch (token.type) {
+        if ((token.value === 'collection' || token.value === 'document')
+            && tokens[current + 1].type === 'word') {
 
-            // 'word' token
-            case 'word':
-                if ((token.value === 'collection' || token.value === 'document')
-                    && tokens[current + 1].type === 'word') {
+            // grab node type and name
+            let type = token.value;
+            let name = tokens[++current].value
 
-                    // grab node type and name
-                    let type = token.value;
-                    let name = tokens[++current].value
+            // create node object
+            let node = {
+                type,
+                name,
+                permissions: []
+            };
 
-                    // create node object
-                    let node = {
-                        type,
-                        name,
-                        permissions: []
-                    };
+            // skip '{' token
+            current += 2;
 
-                    // skip '{' token
-                    current++;
+            // console.log(node);
+            // continue while within scope defined by braces
+            while (token.value !== '}') {
+                node.permissions.push(walk());
+                // console.log(node);
+                token = tokens[++current];
+            }
 
-                    // continue while within scope defined by braces
-                    while (token.value !== '}') {
-                        node.permissions.push(walk());
-                        token = tokens[current];
-                    }
+            // skip '}' token
+            current++;
 
-                    // skip '}' token
-                    current++;
+            return node;
 
-                    return node;
+        } else {
 
-                } else {
+            // console.log(ast);
 
-                    let line = [];
+            let line = [];
 
-                    while (token.type !== 'semi') {
-                        line.push(token.value);
-                        token = tokens[++current];
-                    }
+            while (token.type !== 'semi') {
+                line.push(token);
+                token = tokens[++current];
+            }
 
-                    return lineToNode(line);
-
-                }
-
-            // 'number' token
-            case 'number':
-
-            // 'string' token
-            case 'string':
-
-            // 'semi' token
-            case 'semi':
-
-            // 'paren' token
-            case 'paren':
-
-            // 'colon' token
-            case 'colon':
-
-            // 'brace' token
-            case 'brace':
+            return lineToNode(line);
 
         }
+
     }
 
     // init ast
