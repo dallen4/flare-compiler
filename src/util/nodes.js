@@ -16,9 +16,6 @@ function lineToNode(line = []) {
             condition: line[2].value,
             param: ''
         };
-        node.type = 'access';
-        node.name = line[0].value;
-        node.condition = line[2].value;
 
         if (line[2].value === 'restricted' && line[3].value === '(' && line[5].value === ')')
             node.param = line[4].value;
