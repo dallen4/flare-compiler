@@ -4,18 +4,22 @@ const assert = require('assert');
 // import compiler functions
 var {
     tokenizer,
-    parser
+    parser,
+    transformer
 } = require('../src/parts');
 
 // import test data
 var {
     voltCode,
     tokens,
-    ast
+    ast,
+    finalAst
 } = require('./data');
 
+// run all Volt Compiler tests
 describe('Volt Compiler', function() {
 
+    // test Tokenizer function
     describe('Tokenizer', function() {
         it('should generate correct array of tokens from volt code', function() {
             var testTokens = tokenizer(voltCode);
@@ -23,10 +27,19 @@ describe('Volt Compiler', function() {
         });
     });
     
+    // test Parser function
     describe('Parser', function() {
         it('should generate correct AST from tokens array', function() {
             var testAst = parser(tokens);
             assert.deepStrictEqual(ast, testAst);
+        });
+    });
+
+    // test Transformer function
+    describe('Transformer', function() {
+        it('should transform AST from Parser to new AST format', function() {
+            var testFinalAst = transformer(finalAst);
+            assert.deepStrictEqual(finalAst, testFinalAst);
         });
     });
     
