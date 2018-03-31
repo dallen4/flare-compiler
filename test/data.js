@@ -216,8 +216,54 @@ const ast = {
     ]
 };
 
+const finalAst = {
+    service: 'firestore',
+    name: 'default',
+    collections: [
+        {
+            name: 'chatRooms',
+            access: {
+                read: {
+                    type: 'private',
+                    variable: 'uid'
+                },
+                write: {
+                    type: 'restricted',
+                    variable: 'members'
+                }
+            },
+            variables: [
+                {
+                    type: 'int',
+                    name: 'roomName',
+                    condition: '== 110',
+                    required: true,
+                    static: true
+                },
+                {
+                    type: 'string',
+                    name: 'name',
+                    condition: null,
+                    required: false,
+                    static: true
+                },
+                {
+                    type: 'list',
+                    name: 'members',
+                    condition: null,
+                    required: true,
+                    static: false
+                }
+            ],
+            documents: []
+        }
+    ],
+    documents: []
+};
+
 module.exports = {
     voltCode,
     tokens,
-    ast
+    ast,
+    finalAst
 };
