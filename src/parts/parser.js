@@ -1,4 +1,4 @@
-// TODO Parser function file
+// Parser function file
 'use strict';
 
 var { lineToNode } = require('../util/nodes');
