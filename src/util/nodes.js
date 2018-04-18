@@ -17,15 +17,16 @@ function lineToNode(line = []) {
             param: ''
         };
 
-        if (line[2].value === 'restricted' && line[3].value === '(' && line[5].value === ')')
-            node.param = line[4].value;
-        else if (line[2].value === 'private' && line[4].value !== ')')
-            node.param = line[4].value;
-        else if (line[2].value === 'private')
-            node.param = 'uid';
-        else
+        line[2].value === 'restricted' && line[3].value === '(' && line[5].value === ')'
+            ? node.param = line[4].value
+        : line[2].value === 'private' && line[4].value !== ')'
+            ? node.param = line[4].value
+        : line[2].value === 'private'
+            ? node.param = 'uid'
+        : (() => {
             throw new TypeError('Error in access state declaration!'
-            + '\nRemember: "restricted" access state requires a parameter.');
+            + '\nRemember: "restricted" access state requires a parameter.')
+        });
 
         return node;
 
