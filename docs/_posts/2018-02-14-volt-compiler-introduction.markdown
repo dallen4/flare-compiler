@@ -4,22 +4,25 @@ title:  "Introducing the Volt Compiler"
 date:   2018-02-14 14:27:33 -0600
 categories: jekyll update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+# Welcome to the Volt Compiler!
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+## What is the Volt Compiler?
 
-Jekyll also offers powerful support for code snippets:
+The [Volt Compiler][volt-compiler] was started by [dallen4][dallen4] with the purpose of bootstrapping the design process for the Security Rules language set forth by Google's [Firebase][firebase] platform. While this platform provides a plethora of cloud-based services for serverless application development, two of their newest services ([Cloud Firestore][firestore] and [Storage][storage]) depend on this robust, albeit verbose, Security Rules language for their security. Due to the amount of code and understanding required to make rules for common use cases concerning data validation and security, Volt users believe there is a way to make securing and validating your data easier.
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+## How is this accomplished?
+
+This goal is achieved through the Volt Syntax (*.vlt). This syntax was designed to be lean, declarative, and easy to write (and read) while preserving key attributes and use cases of the Firebase Security Rules language. While the Rules syntax is (reasonably) easy to read, it is more cumbersome to write and requires a fair amount of contextual understanding of how the rules work to achieve permissions and security that are integral to most modern applications.
+
+{% highlight %}
+
 {% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+Check out the [Volt Wiki][volt-wiki] for more information about the syntax concepts and how to get the most out of your Volt experience. File all bugs/feature requests at the [Volt GitHub repo][volt-compiler].
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+[dallen4]: https://github.com/dallen4
+[volt-compiler]:   https://github.com/dallen4/volt-compiler
+[volt-wiki]: https://github.com/dallen4/volt-compiler/wiki
+[firebase]: https://firebase.google.com/
+[firestore]: https://firebase.google.com/docs/firestore
+[storage]: https://firebase.google.com/docs/storage
