@@ -4,12 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
-
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+The [Volt Compiler][volt-compiler] was started by [dallen4][dallen4] with the purpose of bootstrapping the design process for the Security Rules language set forth by Google's [Firebase][firebase] platform. While this platform provides a plethora of cloud-based services for serverless application development, two of their newest services ([Cloud Firestore][firestore] and [Storage][storage]) depend on this robust, albeit verbose, Security Rules language for their security. Due to the amount of code and understanding required to make rules for common use cases concerning data validation and security, Volt users believe there is a way to make securing and validating your data easier.
