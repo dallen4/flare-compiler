@@ -14,160 +14,49 @@ collection chatRooms {
 `;
 
 const tokens = [
-    {
-        type: 'word',
-        value: 'use'
-    },
-    {
-        type: 'word',
-        value: 'default'
-    },
-    {
-        type: 'word',
-        value: 'in'
-    },
-    {
-        type: 'word',
-        value: 'firestore'
-    },
-    {
-        type: 'semi',
-        value: ';'
-    },
-    {
-        type: 'word',
-        value: 'collection'
-    },
-    {
-        type: 'word',
-        value: 'chatRooms'
-    },
-    {
-        type: 'brace',
-        value: '{'
-    },
-    {
-        type: 'word',
-        value: 'read'
-    },
-    {
-        type: 'colon',
-        value: ':'
-    },
-    {
-        type: 'word',
-        value: 'private'
-    },
-    {
-        type: 'paren',
-        value: '('
-    },
-    {
-        type: 'paren',
-        value: ')'
-    },
-    {
-        type: 'semi',
-        value: ';'
-    },
-    {
-        type: 'word',
-        value: 'write'
-    },
-    {
-        type: 'colon',
-        value: ':'
-    },
-    {
-        type: 'word',
-        value: 'restricted'
-    },
-    {
-        type: 'paren',
-        value: '('
-    },
-    {
-        type: 'word',
-        value: 'members'
-    },
-    {
-        type: 'paren',
-        value: ')'
-    },
-    {
-        type: 'semi',
-        value: ';'
-    },
-    {
-        type: 'word',
-        value: 'require'
-    },
-    {
-        type: 'word',
-        value: 'static'
-    },
-    {
-        type: 'word',
-        value: 'int'
-    },
-    {
-        type: 'word',
-        value: 'roomName'
-    },
-    {
-        type: 'cond',
-        value: '=='
-    },
-    {
-        type: 'number',
-        value: '110'
-    },
-    {
-        type: 'semi',
-        value: ';'
-    },
-    {
-        type: 'word',
-        value: 'static'
-    },
-    {
-        type: 'word',
-        value: 'string'
-    },
-    {
-        type: 'word',
-        value: 'name'
-    },
-    {
-        type: 'semi',
-        value: ';'
-    },
-    {
-        type: 'word',
-        value: 'require'
-    },
-    {
-        type: 'word',
-        value: 'list'
-    },
-    {
-        type: 'word',
-        value: 'members'
-    },
-    {
-        type: 'semi',
-        value: ';'
-    },
-    {
-        type: 'brace',
-        value: '}'
-    }
+    { type: 'word', value: 'use' },
+    { type: 'word', value: 'default' },
+    { type: 'word', value: 'in' },
+    { type: 'word', value: 'firestore' },
+    { type: 'semi', value: ';' },
+    { type: 'word', value: 'collection' },
+    { type: 'word', value: 'chatRooms' },
+    { type: 'brace', value: '{' },
+    { type: 'word', value: 'read' },
+    { type: 'colon', value: ':' },
+    { type: 'word', value: 'private' },
+    { type: 'paren', value: '(' },
+    { type: 'paren', value: ')' },
+    { type: 'semi', value: ';' },
+    { type: 'word', value: 'write' },
+    { type: 'colon', value: ':' },
+    { type: 'word', value: 'restricted' },
+    { type: 'paren', value: '(' },
+    { type: 'word', value: 'members' },
+    { type: 'paren', value: ')' },
+    { type: 'semi', value: ';' },
+    { type: 'word', value: 'require' },
+    { type: 'word', value: 'static' },
+    { type: 'word', value: 'int' },
+    { type: 'word', value: 'roomName' },
+    { type: 'cond', value: '==' },
+    { type: 'number', value: '110' },
+    { type: 'semi', value: ';' },
+    { type: 'word', value: 'static' },
+    { type: 'word', value: 'string' },
+    { type: 'word', value: 'name' },
+    { type: 'semi', value: ';' },
+    { type: 'word', value: 'require' },
+    { type: 'word', value: 'list' },
+    { type: 'word', value: 'members' },
+    { type: 'semi', value: ';' },
+    { type: 'brace', value: '}' }
 ];
 
 const ast = {
-    service: 'firestore',
+    type: 'firestore',
     name: 'default',
-    rules: [
+    permissions: [
         {
             type: 'collection',
             name: 'chatRooms',
@@ -217,7 +106,7 @@ const ast = {
 };
 
 const finalAst = {
-    service: 'firestore',
+    type: 'firestore',
     name: 'default',
     collections: [
         {
