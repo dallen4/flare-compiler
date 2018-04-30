@@ -60,9 +60,9 @@ module.exports = function parser(tokens) {
 
     // init ast
     var ast = {
-        service: '',
+        type: '',
         name: '',
-        rules: []
+        permissions: []
     };
 
     // grab first token
@@ -81,10 +81,10 @@ module.exports = function parser(tokens) {
         current++;
 
         // grab name of service (firestore or storage)
-        let service = tokens[++current].value;
+        let type = tokens[++current].value;
 
         // assign ast service value
-        ast.service = service;
+        ast.type = type;
 
         // skip to token after ';' token
         current = current + 2;
@@ -92,14 +92,14 @@ module.exports = function parser(tokens) {
     // else fallback to default db in firestore
     } else {
 
-        ast.service = 'firestore';
+        ast.type = 'firestore';
         ast.name = 'default';
         
     }
 
     // iterate over tokens array
     while (current < tokens.length)
-        ast.rules.push(walk());
+        ast.permissions.push(walk());
     
     return ast;
 
