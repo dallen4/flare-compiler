@@ -1,27 +1,20 @@
 // TODO Transformer function file
 const traverser = require('./traverser');
+const DataElement = require('./DateElement');
 
 'use strict';
 
-module.exports = function transformer(ast = {}) {
+module.exports = function transformer(ast) {
 
-    console.log('transforming AST...');
+    let { type, name, permissions } = ast;
 
-    var newAst = {
-        service: '',
-        name: '',
-        collections: [],
-        documents: []
-    };
+    var newAst = new DataElement(type, name);
 
-    return;
+    newAst.traverse(permissions);
+
+    // TODO consider doing away with traverser
+    // -- add functions to Ast prototype
+
+    return newAst;
 
 }
-
-// TODO define visitor object to pass to Traverser
-// visitor object should include:
-// -- function to filter document nodes out of collection nodes
-// const visitor = {
-//     collection,
-//     document
-// };
