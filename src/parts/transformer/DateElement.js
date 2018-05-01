@@ -1,5 +1,6 @@
 // Data Element prototype
 
+// DataElement constructor
 var DataElement = function(type, name) {
     this.type = type;
     this.name = name;
@@ -7,6 +8,7 @@ var DataElement = function(type, name) {
     this.documents = [];
 };
 
+// recursively traverses nodes, beginning with root permissions array
 DataElement.prototype.traverse = function(nodeArray, parentNode) {
 
     let node = {};
@@ -54,6 +56,7 @@ DataElement.prototype.traverse = function(nodeArray, parentNode) {
 
 }
 
+// returns properly formatted representaiton of AST for testing
 DataElement.prototype.valueOf = function() {
     
     return {
