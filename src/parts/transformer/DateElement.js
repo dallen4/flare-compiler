@@ -7,7 +7,7 @@ var DataElement = function(type, name) {
     this.documents = [];
 };
 
-DataElement.prototype.traverse(nodeArray, parentNode) {
+DataElement.prototype.traverse = function(nodeArray, parentNode) {
 
     let node = {};
 
@@ -39,7 +39,9 @@ DataElement.prototype.traverse(nodeArray, parentNode) {
                 newNode.type = node.dataType;
                 newNode.required = node.required;
                 newNode.static = node.static;
-                // TODO conditional property
+                newNode.condition = node.conditional !== null
+                    ? `${node.conditional.relation} ${node.conditional.value}`
+                    : null;
                 parentNode.variables.push(newNode);
                 break;
 
@@ -49,6 +51,17 @@ DataElement.prototype.traverse(nodeArray, parentNode) {
         }
 
     });
+
+}
+
+DataElement.prototype.valueOf = function() {
+    
+    return {
+        type: this.type,
+        name: this.name,
+        collections: this.collections,
+        documents: this.documents,
+    };
 
 }
 
