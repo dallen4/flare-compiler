@@ -38,8 +38,8 @@ describe('Volt Compiler', function() {
     // test Transformer function
     describe('Transformer', function() {
         it('should transform AST from Parser to new AST format', function() {
-            var testFinalAst = transformer(finalAst);
-            assert.deepStrictEqual(finalAst, testFinalAst);
+            var testFinalAst = transformer(ast);
+            assert.deepStrictEqual(finalAst, testFinalAst.valueOf());
         });
     });
     
