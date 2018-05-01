@@ -7,13 +7,11 @@ const DataElement = require('./DateElement');
 module.exports = function transformer(ast) {
 
     let { type, name, permissions } = ast;
+    // console.log(ast);
 
     var newAst = new DataElement(type, name);
 
     newAst.traverse(permissions);
-
-    // TODO consider doing away with traverser
-    // -- add functions to Ast prototype
 
     return newAst;
 
