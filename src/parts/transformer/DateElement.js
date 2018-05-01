@@ -1,4 +1,4 @@
-// TODO Data Element prototype
+// Data Element prototype
 
 var DataElement = function(type, name) {
     this.type = type;

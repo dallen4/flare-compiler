@@ -1,4 +1,4 @@
-// TODO Transformer function file
+// Transformer function file
 const traverser = require('./traverser');
 const DataElement = require('./DateElement');
 
@@ -7,7 +7,6 @@ const DataElement = require('./DateElement');
 module.exports = function transformer(ast) {
 
     let { type, name, permissions } = ast;
-    // console.log(ast);
 
     var newAst = new DataElement(type, name);
 
