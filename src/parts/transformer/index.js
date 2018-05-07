@@ -1,5 +1,4 @@
 // Transformer function file
-const traverser = require('./traverser');
 const DataElement = require('./DateElement');
 
 'use strict';
