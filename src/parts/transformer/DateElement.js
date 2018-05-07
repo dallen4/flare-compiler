@@ -9,7 +9,7 @@ var DataElement = function(type, name) {
 };
 
 // recursively traverses nodes, beginning with root permissions array
-DataElement.prototype.traverse = function(nodeArray, parentNode) {
+DataElement.prototype.traverse = function(nodeArray, parentNode = this) {
 
     let node = {};
 
@@ -27,7 +27,7 @@ DataElement.prototype.traverse = function(nodeArray, parentNode) {
                 newNode.access = {};
                 newNode.variables = [];
                 this.traverse(node.permissions, newNode);
-                this[`${type}s`].push(newNode);
+                parentNode[`${type}s`].push(newNode);
                 break;
 
             case 'access':
