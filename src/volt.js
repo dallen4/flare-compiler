@@ -35,9 +35,9 @@ function voltToRules(inputFileName = 'test.vlt', outputFileName = 'test.rules') 
 function compiler(voltInput) {
 
     let tokens = tokenizer(voltInput);
-    let ast = parser();
-    let newAst = transformer();
-    let rules = codeGenerator();
+    let ast = parser(tokens);
+    let newAst = transformer(ast);
+    let rules = codeGenerator(newAst);
 
     return rules;
 
