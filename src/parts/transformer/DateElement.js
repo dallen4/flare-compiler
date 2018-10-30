@@ -26,6 +26,7 @@ DataElement.prototype.traverse = function(nodeArray, parentNode = this) {
             case 'document':
                 newNode.access = {};
                 newNode.variables = [];
+                newNode.collections = [];
                 this.traverse(node.permissions, newNode);
                 parentNode[`${type}s`].push(newNode);
                 break;
