@@ -88,19 +88,19 @@ function generateAccessState(accessType, stateType, variableName = 'uid') {
 
 function makeStatic(variableName) {
 
-    return `${requestDataPrefix}.${variableName} == ${resourceDataPrefix}.${variableName}`;
+    return `\t\t\t\t && ${requestDataPrefix}.${variableName} == ${resourceDataPrefix}.${variableName}`;
     
 }
 
 function addType(variableName, variableType) {
 
-    return `${requestDataPrefix}.${variableName} is ${variableType}`;
+    return `\t\t\t\t && ${requestDataPrefix}.${variableName} is ${variableType}`;
 
 }
 
-function addValueCondition(variableName, variableValue, condition = '==') {
+function addValueCondition(variableName, condition = '!= null') {
 
-    return `${requestDataPrefix}.${variableName} ${condition} ${variableValue}`;
+    return `\t\t\t\t && ${requestDataPrefix}.${variableName} ${condition}`;
 }
 
 module.exports = {
