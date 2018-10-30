@@ -144,15 +144,42 @@ const finalAst = {
                     static: false
                 }
             ],
-            documents: []
+            documents: [],
+            collections: [],
         }
     ],
     documents: []
 };
 
+const rulesCode = `service cloud.firestore {
+
+\tmatch /databases/{database}/documents {
+
+\t\tmatch /chatRooms/{chatRoom=**} {
+
+\t\t\tallow read: if request.auth.uid == resource.data.uid
+\t\t\t\t&& request.resource.data.roomName is int
+\t\t\t\t&& request.resource.data.roomName == 110
+\t\t\t\t&& request.resource.data.roomName == resource.data.roomName
+\t\t\t\t&& request.resource.data.name is string
+\t\t\t\t&& request.resource.data.name == resource.data.name
+\t\t\t\t&& request.resource.data.members is list;
+
+\t\t\tallow write: if request.auth.uid in resource.data.members
+\t\t\t\t&& request.resource.data.roomName is int
+\t\t\t\t&& request.resource.data.roomName == 110
+\t\t\t\t&& request.resource.data.roomName == resource.data.roomName
+\t\t\t\t&& request.resource.data.name is string
+\t\t\t\t&& request.resource.data.name == resource.data.name
+\t\t\t\t&& request.resource.data.members is list;
+\t\t}
+\t}
+}`;
+
 module.exports = {
     voltCode,
     tokens,
     ast,
-    finalAst
+    finalAst,
+    rulesCode,
 };
