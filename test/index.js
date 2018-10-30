@@ -5,7 +5,8 @@ const assert = require('assert');
 var {
     tokenizer,
     parser,
-    transformer
+    transformer,
+    codeGenerator,
 } = require('../src/parts');
 
 // import test data
@@ -13,7 +14,8 @@ var {
     voltCode,
     tokens,
     ast,
-    finalAst
+    finalAst,
+    rulesCode,
 } = require('./data');
 
 // run all Volt Compiler tests
@@ -40,6 +42,18 @@ describe('Volt Compiler', function() {
         it('should transform AST from Parser to new AST format', function() {
             var testFinalAst = transformer(ast);
             assert.deepStrictEqual(finalAst, testFinalAst.valueOf());
+        });
+    });
+
+    // test Code Generator function
+    describe('Code Generator', function() {
+        it('should generate correct Security Rules code from final AST from Transformer', function() {
+
+            var testRulesCode = codeGenerator(finalAst);
+
+            // strip whitespace and compare
+            assert.deepEqual(rulesCode.replace(/\s/g,''), testRulesCode.replace(/\s/g,''));
+
         });
     });
     
